@@ -66,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" class="btn btn-large">Войти</button>
             </form>
             <p style="margin-top: 20px; font-size: 14px; color: #7f8c8d; text-align: center;">
-                Тестовые акаунты у всех пароль: <b>12345</b><br>
+                Тестовые аккаунты (пароль: 12345):<br>
+                Студент: <b>student1</b> | Преподаватель: <b>teacher1</b>
             </p>
             <p style="margin-top: 15px; text-align: center; font-size: 14px;">
                 Нет аккаунта? <a href="register.php" style="color: #2980b9;">Зарегистрироваться</a>
