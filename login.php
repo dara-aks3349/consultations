@@ -48,6 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="site-header">
+        <a href="login.php" class="brand">
+            <span class="brand-dot"></span>
+            Консультации
+        </a>
+        <span class="tagline">Вход в систему</span>
+    </header>
+
     <div class="container">
         <h1>Вход в систему</h1>
         <div class="card" style="max-width: 400px;">
@@ -74,5 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </p>
         </div>
     </div>
+
+    <footer class="site-footer">
+        <span class="footer-line">© <?= date('Y') ?> Система консультаций</span>
+    </footer>
 </body>
 </html>

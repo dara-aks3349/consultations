@@ -1,281 +1,548 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    margin: 0;
-    padding: 20px;
+/* =========================================
+   ПЕРЕМЕННЫЕ (Спокойный зелёный)
+   ========================================= */
+:root {
+    --sage: #5a9e6f;
+    --sage-dark: #3f7d52;
+    --sage-light: #eef6f0;
+    --sage-bg: #f4f8f5;
+    --beige: #faf5ec;
+    --beige-dark: #ede2d0;
+    --ink: #1f2a24;
+    --ink-soft: #4a5850;
+    --ink-muted: #7d877f;
+    --white: #ffffff;
+    --danger: #c94a4a;
+    --danger-hover: #a83a3a;
+    --success: #4f9e6a;
+    --border: #d4ded6;
+    --shadow-sm: 0 1px 3px rgba(31, 42, 36, 0.07);
+    --shadow-md: 0 4px 14px rgba(31, 42, 36, 0.1);
+    --shadow-lg: 0 8px 28px rgba(31, 42, 36, 0.13);
+    --radius: 14px;
+    --radius-sm: 9px;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 100%;
+* {
     box-sizing: border-box;
 }
 
-h1 {
-    color: #2c3e50;
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    
+    /* Более яркий градиент в той же гамме */
+    background: linear-gradient(125.54deg, #D8EBE0 1%, #EAE5D2 100%);
+    background-attachment: fixed;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   ШАПКА САЙТА
+   ========================================= */
+.site-header {
     text-align: center;
-    margin-bottom: 25px;
+    padding: 32px 20px 8px;
+    position: relative;
+    margin-bottom: 8px;
 }
 
-/* Таблица */
-.slots-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.slots-table th, .slots-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.slots-table th {
-    background-color: #34495e;
-    color: #ffffff;
-}
-
-/* Кнопки */
-.btn {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #2980b9;
-    color: #ffffff;
+.site-header .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--sage-dark);
     text-decoration: none;
-    border-radius: 4px;
+}
+
+.site-header .brand-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--sage);
+    box-shadow: 0 0 0 4px rgba(90, 158, 111, 0.15);
+}
+
+.site-header .tagline {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+}
+
+/* =========================================
+   КОНТЕЙНЕР
+   ========================================= */
+.container {
+    max-width: 1040px;
+    width: calc(100% - 40px);
+    margin: 20px auto;
+    background: var(--white);
+    padding: 36px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    flex: 1 0 auto;
+    overflow: hidden; /* Защита от вылезания */
+}
+
+/* =========================================
+   ПОДВАЛ САЙТА
+   ========================================= */
+.site-footer {
+    text-align: center;
+    padding: 24px 20px 32px;
+    color: var(--ink-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+}
+
+.site-footer .footer-line {
+    display: inline-block;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--ink-muted);
+    font-weight: 500;
+    min-width: 160px;
+}
+
+/* =========================================
+   ТИПОГРАФИЯ
+   ========================================= */
+h1 {
+    color: var(--ink);
+    text-align: center;
+    margin: 0 0 24px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin: 14px auto 0;
+    background: var(--sage);
+    border-radius: 2px;
+    opacity: 0.7;
+}
+
+h2 {
+    color: var(--ink);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+h3 {
+    color: var(--ink);
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+/* =========================================
+   ВЕРХНЯЯ ПАНЕЛЬ
+   ========================================= */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 14px 20px;
+    background: var(--sage-light);
+    border-radius: var(--radius-sm);
+    gap: 16px;
+    flex-wrap: wrap;
+    border: 1px solid var(--border);
+}
+
+.top-bar span {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+}
+
+.top-bar strong {
+    color: var(--sage-dark);
+}
+
+.container > div:first-child:not(.top-bar) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 14px 20px;
+    background: var(--sage-light);
+    border-radius: var(--radius-sm);
+    gap: 16px;
+    flex-wrap: wrap;
+    border: 1px solid var(--border);
+}
+
+.container > div:first-child:not(.top-bar) span {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+}
+
+.container > div:first-child:not(.top-bar) strong {
+    color: var(--sage-dark);
+}
+
+.container > div:first-child:not(.top-bar) > div {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* =========================================
+   КНОПКИ
+   ========================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background: var(--sage);
+    color: #fff;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 0.94rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    box-shadow: var(--shadow-sm);
     text-align: center;
+    white-space: nowrap;
 }
 
 .btn:hover {
-    background-color: #3498db;
+    background: var(--sage-dark);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn:disabled {
-    background-color: #bdc3c7;
+    background: #c7cdc9;
     cursor: not-allowed;
+    transform: none;
+}
+
+.btn-large {
+    padding: 14px 28px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.btn-logout {
+    background: var(--danger);
+}
+
+.btn-logout:hover {
+    background: var(--danger-hover);
 }
 
 .back-link {
-    display: block;
-    margin-bottom: 20px;
-    color: #2980b9;
+    display: inline-block;
+    /* margin-bottom: 20px; */
+    color: var(--sage-dark);
     text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: color 0.2s;
 }
 
-/* Карточка */
+.back-link:hover {
+    color: var(--sage);
+}
+
+/* =========================================
+   КАРТОЧКИ
+   ========================================= */
 .card {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e1e8ed;
-    max-width: 500px;
-    margin: 0 auto; 
-    padding: 40px 30px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 32px;
     text-align: center;
+    position: relative;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 32px;
+    right: 32px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--sage), transparent);
+    border-radius: 0 0 3px 3px;
+    opacity: 0.6;
 }
 
 .card h2 {
-    font-size: 1.8em;
-    color: #2c3e50;
+    font-size: 1.5rem;
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 22px;
+    color: var(--ink);
 }
 
 .card p {
-    font-size: 1.1em;
-    margin-bottom: 15px;
-    color: #555;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--ink-soft);
 }
 
 .card strong {
-    color: #2c3e50;
+    color: var(--ink);
 }
 
 .card .btn {
     margin-top: 20px;
     width: 100%;
-    padding: 14px;
-    font-size: 1.1em;
-    border-radius: 8px;
 }
 
-/* --- Стили для формы записи --- */
-.booking-form {
-    margin-top: 20px;
+.teacher-card {
+    max-width: 600px;
+    margin-bottom: 32px;
     text-align: left;
 }
 
+/* =========================================
+   ТАБЛИЦЫ (Без обрезки)
+   ========================================= */
+.slots-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 16px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+}
+
+.slots-table th,
+.slots-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+    word-wrap: break-word; /* Текст будет переноситься, если не влезает */
+}
+
+.slots-table th {
+    background: var(--sage-light);
+    color: var(--sage-dark);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--border);
+}
+
+.slots-table tbody tr {
+    background: var(--white);
+    transition: background 0.15s;
+}
+
+.slots-table tbody tr:nth-child(even) {
+    background: #fafbfa;
+}
+
+.slots-table tbody tr:hover {
+    background: var(--sage-light);
+}
+
+.slots-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================================
+   ФОРМЫ
+   ========================================= */
 .form-group {
     margin-bottom: 20px;
 }
 
 .form-group label {
-    display: block; /* Заставляет заголовок быть на отдельной строке */
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #2c3e50;
-    font-size: 16px;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.92rem;
 }
 
-/* Стили для обычных полей ввода (логин, пароль, дата) */
 .form-group input[type="text"],
 .form-group input[type="password"],
-.form-group input[type="datetime-local"] {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 16px;
-    box-sizing: border-box;
-    height: 45px; /* Делаем нормальную высоту для однострочного поля */
-}
-
-/* Стили только для большого текстового поля (тема обращения) */
-.form-group textarea {
-    display: block;
-    width: 100%;
-    min-height: 120px; /* Оставляем большим только его */
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 16px;
-    resize: vertical;
-    box-sizing: border-box;
-}
-
-.required {
-    color: #e74c3c;
-}
-
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* =========================================
-   СТИЛИ И АДАПТИВНОСТЬ ДЛЯ TEACHER.PHP
-   ========================================= */
-
-/* Верхняя панель */
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    align-items: center;
-}
-
-.btn-logout {
-    background: #e74c3c;
-}
-
-/* Карточка создания слота */
-.teacher-card {
-    max-width: 600px;
-    margin-bottom: 30px;
-}
-
-.teacher-card h3 {
-    margin-bottom: 20px;
-}
-
-.teacher-form {
-    text-align: left;
-}
-
-/* Заголовки секций */
-.section-title {
-    margin-top: 40px;
-    margin-bottom: 15px;
-}
-
-/* =========================================
-   СТИЛИ ДЛЯ PROFILE.PHP (Мои консультации)
-   ========================================= */
-
-/* Центрирование текста (для сообщения об отсутствии записей) */
-.text-center {
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Статусы для таблицы */
-.status-active {
-    color: green;
-    font-weight: bold;
-}
-
-.status-completed {
-    color: gray;
-}
-
-/* =========================================
-   СТИЛИ ДЛЯ СТРАНИЦ РЕГИСТРАЦИИ И ВХОДА
-   ========================================= */
-
-/* Карточка для форм авторизации и регистрации */
-.auth-card {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 30px;
-    text-align: center;
-}
-
-/* Форма внутри карточки */
-.auth-form {
-    text-align: left;
-}
-
-/* Выпадающий список (выбор роли) */
+.form-group input[type="datetime-local"],
 select {
     display: block;
     width: 100%;
-    height: 45px;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
     font-family: inherit;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: #fff;
+    font-size: 1rem;
+    background: #fff;
+    color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    height: 46px;
 }
 
-/* Ссылка "Уже есть аккаунт?" */
+.form-group input:focus,
+.form-group textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(90, 158, 111, 0.18);
+}
+
+.form-group textarea {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.booking-form,
+.teacher-form,
+.auth-form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.required {
+    color: var(--danger);
+}
+
+/* =========================================
+   АЛЕРТЫ
+   ========================================= */
+.alert {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.93rem;
+    border: 1px solid transparent;
+}
+
+.alert-success {
+    background: #eaf1ec;
+    color: #3d5a44;
+    border-color: #c8d6cc;
+}
+
+.alert-error {
+    background: #f7eaea;
+    color: #8a3a3a;
+    border-color: #e6c8c8;
+}
+
+/* =========================================
+   СТАТУСЫ
+   ========================================= */
+.status-active {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #eaf1ec;
+    color: #3d5a44;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.status-completed {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #f0f1ef;
+    color: var(--ink-muted);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+/* =========================================
+   СЕКЦИИ
+   ========================================= */
+.section-title {
+    margin-top: 40px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 20px;
+    background: var(--sage);
+    border-radius: 3px;
+}
+
+.text-center {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--ink-muted);
+}
+
+/* =========================================
+   АВТОРИЗАЦИЯ
+   ========================================= */
+.auth-card {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 32px;
+    text-align: left;
+}
+
 .auth-link {
     margin-top: 20px;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.88rem;
+    color: var(--ink-muted);
 }
 
 .auth-link a {
-    color: #2980b9;
+    color: var(--sage-dark);
     text-decoration: none;
+    font-weight: 600;
 }
 
 .auth-link a:hover {
@@ -283,24 +550,21 @@ select {
 }
 
 /* =========================================
-   ПОЛНАЯ АДАПТИВНОСТЬ
+   АДАПТИВНОСТЬ
    ========================================= */
-
 @media (max-width: 768px) {
-    /* 1. Исправляем вылезание за края экрана */
     body {
         padding: 10px;
-        overflow-x: hidden; /* Запрещаем горизонтальную прокрутку всей страницы */
+        overflow-x: hidden;
     }
 
     .container {
         width: 100% !important;
         padding: 15px !important;
-        box-sizing: border-box; /* Отступы теперь ВНУТРИ ширины */
+        box-sizing: border-box;
         margin-bottom: 20px;
     }
 
-    /* 2. Выравниваем меню */
     .container > div:first-child {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -315,11 +579,10 @@ select {
     }
 
     .container > div:first-child .btn {
-        width: 92%;
+        width: 100%;
         margin: 0 !important;
     }
 
-    /* 3. Убираем жесткую ширину у карточек (чтобы teacher.php тянулся) */
     .card {
         max-width: 100% !important;
         width: 100% !important;
@@ -327,23 +590,21 @@ select {
         margin: 0 auto 20px auto !important;
     }
 
-    /* 4. Делаем таблицы "резиновыми" (для всех страниц) */
+    /* ИСПРАВЛЕНО: Убрали table-layout: fixed, из-за которого обрезалась кнопка */
     .slots-table {
         width: 100%;
-        table-layout: fixed; /* Заставляет таблицу строго соблюдать ширину */
-        word-wrap: break-word; /* Разрешает переносить длинные слова */
+        word-wrap: break-word;
         white-space: normal; 
     }
 
     .slots-table th, 
     .slots-table td {
-        padding: 8px 5px; /* Уменьшаем отступы внутри ячеек */
-        font-size: 13px; /* Немного уменьшаем шрифт для планшета */
+        padding: 8px 6px; /* Чуть уменьшили отступы, чтобы влезало */
+        font-size: 13px;
         box-sizing: border-box;
+        word-break: break-word;
     }
 
-    /* --- Адаптивность только для teacher.php --- */
-    /* Верхняя панель встает в столбик */
     .top-bar {
         flex-direction: column;
         align-items: stretch;
@@ -355,19 +616,10 @@ select {
         text-align: center;
     }
 
-    /* Карточка создания слота тянется на всю ширину */
     .teacher-card {
         max-width: 100%;
     }
 
-    /* --- Адаптивность для profile.php --- */
-    /* Верхняя панель (На главную / Выйти) */
-    .top-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
-    
     .top-bar .back-link {
         margin-bottom: 0;
         text-align: center;
@@ -379,15 +631,11 @@ select {
     }
 }
 
-/* =========================================
-   ДЛЯ ТЕЛЕФОНОВ (480px и 360px)
-   ========================================= */
 @media (max-width: 480px) {
     h1 {
         font-size: 22px;
     }
 
-    /* На мобильных таблицы превращаются в карточки */
     .slots-table thead {
         display: none;
     }
@@ -425,7 +673,6 @@ select {
         text-align: center;
     }
 
-    /* Подписи внутри карточек */
     .slots-table td::before {
         content: attr(data-label);
         display: block;
@@ -441,14 +688,13 @@ select {
         font-size: 16px;
     }
 
-    /* Адаптивность для карточки авторизации */
     @media (max-width: 480px) {
         .auth-card {
             padding: 20px 15px;
         }
     }
 }
-/* --- 3. Маленькие телефоны (до 360px) --- */
+
 @media (max-width: 360px) {
     body {
         padding: 5px;

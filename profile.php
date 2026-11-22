@@ -26,6 +26,14 @@ $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="site-header">
+        <a href="index.php" class="brand">
+            <span class="brand-dot"></span>
+            Консультации
+        </a>
+        <span class="tagline">Личный кабинет</span>
+    </header>
+
     <div class="container">
         <div class="top-bar">
             <a href="index.php" class="back-link">&larr; На главную</a>
@@ -66,5 +74,9 @@ $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         <?php endif; ?>
     </div>
+
+    <footer class="site-footer">
+        <span class="footer-line">© <?= date('Y') ?> Система консультаций</span>
+    </footer>
 </body>
 </html>

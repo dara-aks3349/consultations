@@ -7,7 +7,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$sql = "SELECT s.id, s.subject, s.start_time, u.full_name as teacher_name 
+// Запрос теперь получает и ID записи, чтобы понять, занят слот или нет
+$sql = "SELECT s.id, s.subject, s.start_time, u.full_name as teacher_name, a.id as appointment_id 
         FROM slots s 
         JOIN users u ON s.teacher_id = u.id 
         LEFT JOIN appointments a ON s.id = a.slot_id 
@@ -24,6 +25,14 @@ $slots = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="site-header">
+        <a href="index.php" class="brand">
+            <span class="brand-dot"></span>
+            Консультации
+        </a>
+        <span class="tagline">Запись на консультации преподавателей</span>
+    </header>
+
     <div class="container">
         
         <!-- Меню пользователя -->
@@ -33,14 +42,14 @@ $slots = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php if ($_SESSION['role'] == 'student'): ?>
                     <a href="profile.php" class="btn" style="margin-right: 10px;">Мои записи</a>
                 <?php endif; ?>
-                <a href="logout.php" class="btn" style="background: #e74c3c;">Выйти</a>
+                <a href="logout.php" class="btn" style="background: #c94a4a;">Выйти</a>
             </div>
         </div>
 
         <h1>Расписание консультаций</h1>
 
         <?php if (empty($slots)): ?>
-            <p>Свободных консультаций нет.</p>
+            <p class="text-center">Свободных консультаций нет.</p>
         <?php else: ?>
             <table class="slots-table">
                 <thead>
@@ -58,7 +67,13 @@ $slots = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td data-label="Предмет:"><?= htmlspecialchars($slot['subject']) ?></td>
                             <td data-label="Время:"><?= date('d.m.Y H:i', strtotime($slot['start_time'])) ?></td>
                             <td data-label="Действие:">
-                                <a href="book.php?slot_id=<?= $slot['id'] ?>" class="btn">Записаться</a>
+                                <?php if ($slot['appointment_id'] || strtotime($slot['start_time']) < time()): ?>
+                                    <!-- Если слот занят или время прошло — серая кнопка с подсказкой -->
+                                    <button class="btn" style="background-color: #cbd5e1; cursor: not-allowed; color: #64748b;" disabled title="Время уже занято">Записаться</button>
+                                <?php else: ?>
+                                    <!-- Если свободен — зеленая кнопка -->
+                                    <a href="book.php?slot_id=<?= $slot['id'] ?>" class="btn">Записаться</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -66,5 +81,9 @@ $slots = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </table>
         <?php endif; ?>
     </div>
+
+    <footer class="site-footer">
+        <span class="footer-line">© <?= date('Y') ?> Система консультаций</span>
+    </footer>
 </body>
 </html>

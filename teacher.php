@@ -58,15 +58,21 @@ $bookings = $stmt_app->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="site-header">
+        <a href="teacher.php" class="brand">
+            <span class="brand-dot"></span>
+            Консультации
+        </a>
+        <span class="tagline">Панель преподавателя</span>
+    </header>
+
     <div class="container">
-        <!-- Заменили инлайн-стили на класс top-bar -->
         <div class="top-bar">
             <span>Преподаватель: <strong><?= htmlspecialchars($_SESSION['name']) ?></strong></span>
             <a href="logout.php" class="btn btn-logout">Выйти</a>
         </div>
         <h1>Панель преподавателя</h1>
         
-        <!-- Заменили стили карточки на класс teacher-card -->
         <div class="card teacher-card">
             <h3>Создать новый интервал для консультации</h3>
             
@@ -77,7 +83,6 @@ $bookings = $stmt_app->fetchAll(PDO::FETCH_ASSOC);
                 <div class="alert alert-success"><?= $slot_success ?></div>
             <?php endif; ?>
 
-            <!-- Убрали text-align: left, он теперь в CSS -->
             <form method="POST" class="teacher-form">
                 <div class="form-group">
                     <label>Название предмета</label>
@@ -108,16 +113,15 @@ $bookings = $stmt_app->fetchAll(PDO::FETCH_ASSOC);
                 <tbody>
                     <?php foreach ($bookings as $b): ?>
                         <tr>
-                            <!-- Добавили data-label для мобильной версии -->
                             <td data-label="Студент:"><?= htmlspecialchars($b['student_name']) ?></td>
                             <td data-label="Предмет:"><?= htmlspecialchars($b['subject']) ?></td>
                             <td data-label="Время:"><?= date('d.m.Y H:i', strtotime($b['start_time'])) ?></td>
                             <td data-label="Тема:"><?= htmlspecialchars($b['topic']) ?></td>
                             <td data-label="Статус:">
                                 <?php if ($b['status'] == 'active'): ?>
-                                    <span style="color: green; font-weight: bold;">Активна</span>
+                                    <span class="status-active">Активна</span>
                                 <?php else: ?>
-                                    <span style="color: gray;">Завершена</span>
+                                    <span class="status-completed">Завершена</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -144,5 +148,9 @@ $bookings = $stmt_app->fetchAll(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
+
+    <footer class="site-footer">
+        <span class="footer-line">© <?= date('Y') ?> Система консультаций</span>
+    </footer>
 </body>
 </html>

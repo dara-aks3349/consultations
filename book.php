@@ -70,6 +70,14 @@ $is_booked = $check->fetch();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="site-header">
+        <a href="index.php" class="brand">
+            <span class="brand-dot"></span>
+            Консультации
+        </a>
+        <span class="tagline">Запись на консультацию</span>
+    </header>
+
     <div class="container">
         <a href="index.php" class="back-link">&larr; Вернуться к списку</a>
         <h1>Запись на консультацию</h1>
@@ -103,5 +111,9 @@ $is_booked = $check->fetch();
             <?php endif; ?>
         </div>
     </div>
+
+    <footer class="site-footer">
+        <span class="footer-line">© <?= date('Y') ?> Система консультаций</span>
+    </footer>
 </body>
 </html>
